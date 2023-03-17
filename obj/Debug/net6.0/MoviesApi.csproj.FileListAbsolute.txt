@@ -85,3 +85,7 @@ C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Auto
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Azure.Storage.Blobs.dll
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Azure.Storage.Common.dll
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\System.IO.Hashing.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
