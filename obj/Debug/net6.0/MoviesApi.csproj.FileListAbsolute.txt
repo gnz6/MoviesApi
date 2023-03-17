@@ -82,3 +82,6 @@ C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\obj\Debug\net6.0\Movi
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\obj\Debug\net6.0\ref\MoviesApi.dll
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Azure.Storage.Blobs.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Azure.Storage.Common.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\System.IO.Hashing.dll

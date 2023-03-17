@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoviesApi.Models;
+using MoviesApi.Services;
 
 namespace MoviesApi
 {
@@ -15,10 +16,13 @@ namespace MoviesApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddTransient<IStorage, AzureStorage>();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddDbContext<MoviesApiDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
+            
             services.AddEndpointsApiExplorer();
         }
 
