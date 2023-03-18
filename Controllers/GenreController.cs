@@ -8,12 +8,12 @@ namespace MoviesApi.Controllers
 {
     [ApiController]
     [Route("api/genres")]
-    public class GenreController : Controller
+    public class GenreController : CustomBaseController
     {
         private readonly MoviesApiDbContext context;
         private readonly IMapper mapper;
 
-        public GenreController(MoviesApiDbContext context, IMapper mapper)
+        public GenreController(MoviesApiDbContext context, IMapper mapper) : base(context, mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -24,24 +24,30 @@ namespace MoviesApi.Controllers
         [HttpGet]
         public async Task<ActionResult<List<GenreDTO>>> GetGenres()
         {
-            var entities = await context.Genres.ToListAsync();
-            var dtos = mapper.Map<List<GenreDTO>>(entities);
-            return dtos;
+            //var entities = await context.Genres.ToListAsync();
+            //var dtos = mapper.Map<List<GenreDTO>>(entities);
+            //return dtos;
+
+            return await Get<Genre, GenreDTO>();
+
         }
 
 
         [HttpGet("{id:int}", Name = "GetOneGenre")]
         public async Task<ActionResult<GenreDTO>> GetOneGenre(int id)
         {
-            var entity = await context.Genres.FirstOrDefaultAsync(g => g.Id == id);
+            //var entity = await context.Genres.FirstOrDefaultAsync(g => g.Id == id);
 
-            if (entity == null)
-            {
-                return NotFound();
-            }
+            //if (entity == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var dto = mapper.Map<GenreDTO>(entity);
-            return dto;
+            //var dto = mapper.Map<GenreDTO>(entity);
+            //return dto;
+
+            return await Get<Genre, GenreDTO>(id); 
+
         }
 
         [HttpPost]

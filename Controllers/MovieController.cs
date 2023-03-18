@@ -7,6 +7,7 @@ using MoviesApi.Helpers;
 using MoviesApi.Models;
 using MoviesApi.Services;
 using System.ComponentModel;
+using System.Linq.Dynamic.Core;
 
 namespace MoviesApi.Controllers
 {
@@ -18,14 +19,18 @@ namespace MoviesApi.Controllers
 
         public readonly IMapper mapper;
         public readonly IStorage storage;
+
+        public readonly ILogger logger;
+
         private readonly string container = "movies";
 
 
-        public MovieController(MoviesApiDbContext context, IMapper mapper, IStorage storage)
+        public MovieController(MoviesApiDbContext context, IMapper mapper, IStorage storage, ILogger logger)
         {
             this.context = context;
             this.mapper = mapper;
             this.storage = storage;
+            this.logger = logger;
 
         }
 
@@ -79,6 +84,23 @@ namespace MoviesApi.Controllers
                 movieQueryable = movieQueryable.Where(x => x.Movies_Genres.Select(y => y.GenreId).Contains(filterMovieDTO.GenreId));
             }
 
+            // Order
+
+            if(!string.IsNullOrEmpty(filterMovieDTO.OrderField))
+            {
+                var orderType = filterMovieDTO.AscOrder ? "ascending" : "descending";
+                try
+                {
+                movieQueryable = movieQueryable.OrderBy($"{ filterMovieDTO.OrderField } {orderType} ");
+                }
+                catch(Exception ex)
+                {
+                    logger.LogError(ex.Message, ex);
+                }
+            }
+
+
+
             await HttpContext.InsertParams(movieQueryable, filterMovieDTO.ItemsPerPage);
 
             var movies = await movieQueryable.Paginate(filterMovieDTO.Paging).ToListAsync();
@@ -90,10 +112,16 @@ namespace MoviesApi.Controllers
 
 
         [HttpGet("{id}" , Name = "GetOneMovie")]
-        public async Task<ActionResult<MovieDTO>> GetOneMovie(int id)
+        public async Task<ActionResult<MovieDetailDTO>> GetOneMovie(int id)
         {
-            var movie = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);
-            return mapper.Map<MovieDTO>(movie);
+            var movie = await context.Movies
+                .Include(x => x.Movies_Actors).ThenInclude(y => y.Actor)
+                .Include(x => x.Movies_Genres).ThenInclude(y => y.Genre)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            movie.Movies_Actors = movie.Movies_Actors.OrderBy(x => x.Order).ToList();
+
+            return mapper.Map<MovieDetailDTO>(movie);
 
         }
 

@@ -22,11 +22,42 @@ namespace MoviesApi.Helpers
                 .ForMember(x => x.Movies_Genres, options => options.MapFrom(MapMovies_Genres))
                 .ForMember(x => x.Movies_Actors, options => options.MapFrom(MapMovies_Actors));
 
-
+            CreateMap<Movie, MovieDetailDTO>()
+                .ForMember( x => x.Genres, options => options.MapFrom(MapMovieGenres))
+                .ForMember( x => x.Actors, options => options.MapFrom(MapMovieActors));
 
             CreateMap<PatchMovieDTO, Movie>().ReverseMap();
 
         }
+
+        private List<ActorMovieDetailDTO> MapMovieActors(Movie movie, MovieDetailDTO movieDetailDTO)
+        {
+            var result = new List<ActorMovieDetailDTO>();
+
+            if (movie.Movies_Actors == null) { return result; }
+            foreach (var movieActor in movie.Movies_Actors)
+            {
+                result.Add(new ActorMovieDetailDTO() { ActorId = movieActor.ActorId, Name = movieActor.Actor.Name , Character = movieActor.Character });
+            }
+
+            return result;
+        }
+
+
+        private List<GenreDTO> MapMovieGenres(Movie movie, MovieDetailDTO movieDetailDTO)
+        {
+            var result = new List<GenreDTO>();
+            if (movie.Movies_Genres == null) { return result; }
+            foreach (var movieGenre in movie.Movies_Genres)
+            {
+                result.Add(new GenreDTO() { Id = movieGenre.GenreId, Name = movieGenre.Genre.Name });
+            }
+            return result;
+        }
+
+
+
+
         private List<Movies_Genres> MapMovies_Genres(MovieCreationDTO movieCreationDTO, Movie movie)
         {
             var result = new List<Movies_Genres>();

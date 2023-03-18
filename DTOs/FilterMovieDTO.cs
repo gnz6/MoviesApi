@@ -16,9 +16,14 @@
         public string Title { get; set; }
 
         public int GenreId { get; set; }
+
         public bool InCinema { get; set; }
 
         public bool NextRelease { get; set; }
+
+        public string OrderField { get; set; }
+
+        public bool AscOrder { get; set; } = true;
 
 
     }
