@@ -10,5 +10,8 @@ namespace MoviesApi.Models
         public string Name { get; set; }
         public DateTime Birthday { get; set; }
         public string Picture { get; set; }
+
+        public List<Movies_Actors> Movies_Actors { get; set; }
+        public List<Movies_Genres> Movies_Genres { get; set; }
     }
 }

@@ -8,5 +8,7 @@ namespace MoviesApi.Models
         [Required]
         [StringLength(40)]
         public string Name { get; set; }
+        public List<Movies_Actors> Movies_Actors { get; set; }
+        public List<Movies_Genres> Movies_Genres { get; set; }
     }
 }

@@ -11,5 +11,8 @@ namespace MoviesApi.Models
         public bool InCinema { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string Poster { get; set; }
+
+        public List<Movies_Actors> Movies_Actors { get; set; }
+        public List<Movies_Genres> Movies_Genres { get; set; }
     }
 }
