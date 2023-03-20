@@ -13,7 +13,7 @@ namespace MoviesApi.Controllers
 {
     [ApiController]
     [Route("api/movies")]
-    public class MovieController : ControllerBase
+    public class MovieController : CustomBaseController
     {
         private readonly MoviesApiDbContext context;
 
@@ -25,7 +25,7 @@ namespace MoviesApi.Controllers
         private readonly string container = "movies";
 
 
-        public MovieController(MoviesApiDbContext context, IMapper mapper, IStorage storage, ILogger logger)
+        public MovieController(MoviesApiDbContext context, IMapper mapper, IStorage storage, ILogger logger) : base( context , mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -189,31 +189,33 @@ namespace MoviesApi.Controllers
         [HttpPatch("{id}")]
         public async Task<ActionResult> EditField(int id, [FromBody] JsonPatchDocument<PatchMovieDTO> patchDocument)
         {
-            if (patchDocument == null)
-            {
-                return BadRequest();
-            }
+            //if (patchDocument == null)
+            //{
+            //    return BadRequest();
+            //}
 
-            var entityDB = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);
-            if (entityDB == null) { return NotFound(); }
+            //var entityDB = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);
+            //if (entityDB == null) { return NotFound(); }
 
-            var entityDTO = mapper.Map<PatchMovieDTO>(entityDB);
+            //var entityDTO = mapper.Map<PatchMovieDTO>(entityDB);
 
-            patchDocument.ApplyTo(entityDTO, ModelState);
+            //patchDocument.ApplyTo(entityDTO, ModelState);
 
-            var isValid = TryValidateModel(entityDTO);
+            //var isValid = TryValidateModel(entityDTO);
 
-            if (!isValid)
+            //if (!isValid)
 
-            {
-                return BadRequest(ModelState);
-            }
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
-            mapper.Map(entityDTO, entityDB);
+            //mapper.Map(entityDTO, entityDB);
 
-            await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
 
-            return NoContent();
+            //return NoContent();
+
+            return await Patch <Movie, PatchMovieDTO>(id, patchDocument);
 
 
         }
@@ -223,14 +225,16 @@ namespace MoviesApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteMovie(int id)
         {
-            var exist = await context.Movies.AnyAsync(g => g.Id == id);
-            if (!exist)
-            {
-                return NotFound();
-            }
-            context.Remove(new Movie() { Id = id });
-            await context.SaveChangesAsync();
-            return NoContent();
+            //var exist = await context.Movies.AnyAsync(g => g.Id == id);
+            //if (!exist)
+            //{
+            //    return NotFound();
+            //}
+            //context.Remove(new Movie() { Id = id });
+            //await context.SaveChangesAsync();
+            //return NoContent();
+        
+        return await Delete<Movie>(id);
         }
     }
     }

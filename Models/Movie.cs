@@ -2,7 +2,7 @@
 
 namespace MoviesApi.Models
 {
-    public class Movie
+    public class Movie : IId
     {
         public int Id { get; set; }
         [Required]
@@ -14,5 +14,6 @@ namespace MoviesApi.Models
 
         public List<Movies_Actors> Movies_Actors { get; set; }
         public List<Movies_Genres> Movies_Genres { get; set; }
+        public List<Movies_Rooms> Movies_Rooms { get; set; }
     }
 }
