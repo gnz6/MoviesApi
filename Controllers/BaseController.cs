@@ -68,12 +68,21 @@ namespace MoviesApi.Controllers
             return NoContent();
         }
 
-        protected async Task<List<TDTO>> Get<TEntity,TDTO>(PagingDTO pagingDTO) where TEntity : class, IId
+        protected async Task<List<TDTO>> Get<TEntity, TDTO>(PagingDTO pagingDTO) where TEntity : class, IId
         {
             var queryable = context.Set<TEntity>().AsQueryable();
+            //await HttpContext.InsertParams(queryable, pagingDTO.ItemsPerPage);
+
+
+            //var entities = await queryable.Paginate(pagingDTO).ToListAsync();
+            //return mapper.Map<List<TDTO>>(entities);
+
+            return  await Get<TEntity, TDTO>(pagingDTO, queryable);
+        }
+
+        protected async Task<List<TDTO>> Get<TEntity, TDTO>(PagingDTO pagingDTO, IQueryable<TEntity> queryable) where TEntity : class, IId
+        {
             await HttpContext.InsertParams(queryable, pagingDTO.ItemsPerPage);
-
-
             var entities = await queryable.Paginate(pagingDTO).ToListAsync();
             return mapper.Map<List<TDTO>>(entities);
         }

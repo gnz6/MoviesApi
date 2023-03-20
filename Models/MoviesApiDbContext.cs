@@ -23,6 +23,7 @@ namespace MoviesApi.Models
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         public DbSet<Movies_Actors> Movies_Actors { get; set; }
         public DbSet<Movies_Genres> Movies_Genres { get; set; }
         public DbSet<Movies_Rooms> Movies_Rooms { get; set; }
