@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NetTopologySuite.Geometries;
+using System.ComponentModel.DataAnnotations;
 
 namespace MoviesApi.Models
 {
@@ -11,6 +12,7 @@ namespace MoviesApi.Models
         public string Name { get; set; }
         public List <Movies_Rooms> MoviesRooms { get; set; }
 
+        public Point Location { get; set; }
 
     }
 }

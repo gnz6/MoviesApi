@@ -1,18 +1,35 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using MoviesApi.DTOs;
 using MoviesApi.Models;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 namespace MoviesApi.Helpers
 {
     public class AutoMapperProfile : Profile
     {
-        public AutoMapperProfile()
+        public AutoMapperProfile(GeometryFactory geometryFactory)
         {
             CreateMap<Genre, GenreDTO>().ReverseMap();
             CreateMap<GenreCreationDTO, Genre>();
 
-            CreateMap<Room, RoomDTO>().ReverseMap();
-            CreateMap<RoomCreationDTO, Room>();
+            CreateMap<IdentityUser, UserDTO>();
+
+
+
+            CreateMap<Room, RoomDTO>()
+                .ForMember(x => x.Latitude, x => x.MapFrom(y => y.Location.Y))
+                .ForMember(x => x.Longitude, x => x.MapFrom(y => y.Location.X));
+
+
+            CreateMap<RoomCreationDTO, Room>()
+                .ForMember(x=> x.Location, x=> x.MapFrom(y => geometryFactory.CreatePoint(new Coordinate(y.Latitude, y.Longitude))));
+
+            CreateMap<RoomCreationDTO, Room>()
+                .ForMember(x => x.Location, x => x.MapFrom(y => geometryFactory.CreatePoint(new Coordinate(y.Latitude, y.Longitude))));
+
+
 
             CreateMap<Actor, ActorDTO>().ReverseMap();
             CreateMap<ActorCreationDTO, Actor>().ForMember(x => x.Picture, options => options.Ignore());
@@ -28,6 +45,7 @@ namespace MoviesApi.Helpers
             CreateMap<Movie, MovieDetailDTO>()
                 .ForMember( x => x.Genres, options => options.MapFrom(MapMovieGenres))
                 .ForMember( x => x.Actors, options => options.MapFrom(MapMovieActors));
+
 
             CreateMap<PatchMovieDTO, Movie>().ReverseMap();
 

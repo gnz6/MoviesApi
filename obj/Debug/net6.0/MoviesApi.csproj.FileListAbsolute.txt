@@ -90,3 +90,7 @@ C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Micr
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\System.Linq.Dynamic.Core.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\NetTopologySuite.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\bin\Debug\net6.0\NetTopologySuite.IO.SqlServerBytes.dll
+C:\Users\Gonza\Desktop\.net\01-Autores\MoviesApi\MoviesApi\obj\Debug\net6.0\EFCoreSqlServerNetTopologySuite.cs
