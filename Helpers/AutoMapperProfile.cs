@@ -17,6 +17,12 @@ namespace MoviesApi.Helpers
             CreateMap<IdentityUser, UserDTO>();
 
 
+            CreateMap<Review, ReviewDTO>()
+                         .ForMember(x => x.UserName, x => x.MapFrom(y => y.User.UserName));
+
+            CreateMap<ReviewDTO, Review>();
+            CreateMap<ReviewCreateDTO, Review>();
+
 
             CreateMap<Room, RoomDTO>()
                 .ForMember(x => x.Latitude, x => x.MapFrom(y => y.Location.Y))
